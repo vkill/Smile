@@ -72,9 +72,16 @@ public func unmodify(emoji: String) -> String {
 
 /// Return standard name for a emoji
 public func name(emoji: String) -> [String] {
-  let string = NSMutableString(string: String(emoji))
-  var range = CFRangeMake(0, CFStringGetLength(string))
-  CFStringTransform(string, &range, kCFStringTransformToUnicodeName, false)
+    #if os(Linux)
+    let string = emoji
+    #else
+    let string = NSMutableString(string: String(emoji))
+    var range = CFRangeMake(0, CFStringGetLength(string))
+    CFStringTransform(string, &range, kCFStringTransformToUnicodeName, false)
+    #endif
+//  let string = NSMutableString(string: String(emoji))
+//  var range = CFRangeMake(0, CFStringGetLength(string))
+//  CFStringTransform(string, &range, kCFStringTransformToUnicodeName, false)
 
   return Utils.dropPrefix(string: String(string), subString: "\\N")
     .components(separatedBy: "\\N")

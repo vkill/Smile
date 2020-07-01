@@ -26,6 +26,8 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+/Smile.xcodeproj
+
 # CocoaPods
 Pods
 
